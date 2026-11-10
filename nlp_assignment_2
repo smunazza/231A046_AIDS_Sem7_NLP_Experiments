@@ -1,0 +1,186 @@
+Assignment: Word Sense Disambiguation and Anaphora Resolution
+
+Q.1 Given the sentence:
+“The bank will not open until the river recedes.”
+a) Identify and explain the type of lexical ambiguity present.
+The given sentence contains lexical ambiguity, specifically word sense ambiguity (polysemy).
+
+Lexical ambiguity occurs when a word has more than one meaning, and it becomes difficult to determine which meaning is intended without understanding the context.
+
+In this sentence, the word "bank" has two possible meanings:
+1. Financial Bank: An institution where people deposit, withdraw, and manage money.
+2. River Bank: The land along the side of a river.
+Here, the word "bank" refers to the land beside the river because the sentence mentions that the river must recede before the bank opens.
+
+Therefore, the correct meaning can be understood using the surrounding context.
+b) Suggest how WordNet or BabelNet could help resolve this ambiguity.
+WordNet and BabelNet are lexical databases that help NLP systems understand the different meanings of words.
+
+1. WordNet:
+- WordNet groups words according to their meanings, called synsets (sets of synonyms).
+- It provides different meanings of a word along with their definitions and relationships.
+- For the word "bank", WordNet provides meanings such as:
+  - A financial institution.
+  - Sloping land beside a river.
+- An NLP system can compare these meanings with the surrounding words, such as "river" and "recedes".
+- Since these words are related to water and geographical locations, the system can select the riverbank meaning.
+2. BabelNet:
+- BabelNet is a multilingual semantic network that combines information from different language resources, including WordNet and Wikipedia.
+- It provides meanings of words, definitions, and relationships between concepts.
+- It can identify that "bank" may refer to a financial institution or the land beside a river.
+- By analysing related concepts such as "river", "water" and "shore", the system can identify the correct meaning.
+Thus, WordNet and BabelNet help NLP systems resolve ambiguity by providing possible meanings and semantic relationships between words.
+c) Explain why automatic systems might still fail in some contexts.
+Even with resources like WordNet and BabelNet, automatic systems may sometimes fail to identify the correct meaning of a word.
+
+The main reasons are:
+
+1. Insufficient Context: Sometimes a sentence does not provide enough information to identify the intended meaning of a word.
+
+2. Multiple Possible Meanings: A word may have several meanings that are closely related, making it difficult to select the correct one.
+
+3. Domain-Specific Language: Words may have special meanings in different fields, such as medicine, law, business, or technology.
+
+4. Figurative Language: Systems may struggle to understand metaphors, sarcasm, and indirect meanings.
+
+5. Limited Knowledge: WordNet and BabelNet may not contain every possible meaning, new usage, or context-specific expression.
+
+Conclusion: Automatic systems can use lexical databases and surrounding words to resolve ambiguity, but understanding the exact meaning still requires proper contextual knowledge.
+
+
+
+Q.2 A company is building an NLP system to classify word senses using Naïve Bayes.
+a) Briefly explain how Naïve Bayes can be applied to Word Sense Disambiguation (WSD).
+Word Sense Disambiguation (WSD) is the process of identifying the correct meaning of a word based on the context in which it is used.
+
+Naïve Bayes is a supervised machine learning algorithm based on probability. It can be used to identify the correct meaning of an ambiguous word by analysing the surrounding words.
+
+Working of Naïve Bayes in WSD:
+
+1. Collect Training Data: The system is provided with sentences in which ambiguous words are already labelled with their correct meanings.
+
+2. Identify Possible Senses: The system identifies all possible meanings of the target word.
+
+3. Extract Features: It examines surrounding words and other contextual features to understand the sentence.
+
+4. Calculate Probabilities: Naïve Bayes calculates the probability of each possible meaning based on the surrounding words.
+
+5. Select the Best Meaning: The system selects the meaning with the highest probability.
+
+For example, consider the word "bank":
+- Sentence 1: "I deposited money in the bank."
+- Sentence 2: "We sat near the bank of the river."
+The system learns that words like "money" and "deposited" are associated with a financial bank, while words like "river" and "sat" may indicate a riverbank.
+
+It then uses these learned patterns to identify the correct meaning in new sentences.
+Thus, Naïve Bayes uses probability and surrounding words to determine the most likely meaning of an ambiguous word.
+b) What are its key limitations compared to Lesk's knowledge-based approach?
+Naïve Bayes and Lesk's algorithm are two different approaches to Word Sense Disambiguation.
+
+Naïve Bayes is a supervised learning approach that uses labelled training data, whereas Lesk's algorithm is a knowledge-based approach that uses dictionary definitions and word overlap.
+
+The main limitations of Naïve Bayes compared to Lesk's approach are:
+1. Requires Labelled Training Data: Naïve Bayes needs a large amount of manually labelled data to learn different word meanings. Lesk can work using dictionary definitions without requiring labelled training sentences.
+2. Data Dependency: Its performance depends heavily on the quality and quantity of training data. Lesk can use existing lexical resources such as WordNet.
+3. Independent Feature Assumption: Naïve Bayes assumes that features (surrounding words) are independent of each other. However, words in natural language are often related.
+4. Difficulty with Unseen Words: Naïve Bayes may struggle when it encounters words or contexts that were not present in its training data. Lesk can use dictionary definitions to identify possible meanings.
+5. Limited Semantic Understanding: Naïve Bayes mainly learns statistical patterns, whereas Lesk compares the meanings of words using dictionary definitions and semantic information.
+Comparison Table:
+Naïve Bayes	Lesk's Algorithm
+Supervised learning approach.	Knowledge-based approach.
+Requires labelled training data.	Uses dictionary definitions.
+Uses probability to identify word senses.	Uses overlap between definitions and context.
+Assumes features are independent.	Uses semantic information from lexical resources.
+Performance depends on training data.	Performance depends on the quality of dictionary definitions.
+
+c) Propose one improvement using a semi-supervised method such as Yarowsky's algorithm.
+One improvement is to use Yarowsky's algorithm, which is a semi-supervised learning method used for Word Sense Disambiguation.
+
+Semi-supervised learning uses a small amount of labelled data along with a large amount of unlabelled data.
+
+Working of Yarowsky's Algorithm:
+1. Start with Labelled Data: Provide a small set of sentences in which the correct meanings of ambiguous words are already identified.
+2. Learn Contextual Patterns: The system learns which words and phrases are commonly associated with each meaning.
+3. Use Unlabelled Data: The system applies these learned patterns to new sentences that do not have labels.
+4. Assign Word Senses: It predicts the meaning of ambiguous words in the unlabelled sentences.
+5. Select High-Confidence Predictions: Only predictions with high confidence are selected and added to the labelled dataset.
+6. Repeat the Process: The system trains again using the expanded dataset and repeats the process until no significant improvement occurs.
+Example:
+
+Consider the word "plant":
+- "The plant produces electricity." — Industrial facility.
+- "The plant needs water." — Living organism.
+Initially, the system learns from a few labelled examples. It then identifies similar patterns in unlabelled sentences and gradually improves its ability to distinguish between the two meanings.
+
+Advantages of Yarowsky's Algorithm:
+- Requires less manually labelled training data.
+- Uses large amounts of unlabelled text.
+- Improves word sense classification over repeated iterations.
+- Reduces the cost and effort of preparing training datasets.
+Conclusion: Yarowsky's algorithm can improve Naïve Bayes-based WSD by using unlabelled data to expand the training dataset and improve classification accuracy.
+
+
+
+Q.3 Consider the sentence:
+“John met Alex after he finished the project.”
+a) Identify the anaphora and discuss why reference resolution is difficult here.
+Anaphora is a linguistic phenomenon in which a word or phrase refers back to another word or expression mentioned earlier in a sentence or paragraph.
+
+In the given sentence:
+
+"John met Alex after he finished the project."
+
+The pronoun "he" is the anaphor because it refers to a person mentioned earlier in the sentence.
+
+There are two possible antecedents:
+1. John: The pronoun "he" may refer to John, meaning John finished the project before meeting Alex.
+2. Alex: The pronoun "he" may refer to Alex, meaning Alex finished the project before meeting John.
+Why is reference resolution difficult?
+1. Multiple Antecedents: Both John and Alex are possible references for the pronoun "he".
+2. Same Gender: Both names refer to male individuals, so gender information cannot help identify the correct person.
+3. Lack of Context: The sentence does not provide enough information to determine who actually finished the project.
+4. Meaning-Based Understanding: The system may need additional information about the people and the situation to identify the correct reference.
+Therefore, the sentence is ambiguous because the pronoun "he" can refer to either John or Alex.
+b) How would Hobbs' algorithm attempt to resolve "he"?
+Hobbs' algorithm is a syntax-based algorithm used for pronoun resolution. It identifies the possible antecedent of a pronoun by analysing the grammatical structure of a sentence using its parse tree.
+
+It mainly follows grammatical rules and searches for a suitable noun phrase that can act as the antecedent.
+
+Working of Hobbs' Algorithm:
+1. The sentence is first converted into a syntactic parse tree.
+2. When the algorithm encounters a pronoun, it examines the grammatical structure of the sentence.
+3. It searches for suitable noun phrases that appear before the pronoun.
+4. It checks grammatical constraints such as number and gender agreement.
+5. The first suitable noun phrase found according to its tree-search order is selected as the antecedent.
+Application to the given sentence:
+
+Sentence: "John met Alex after he finished the project."
+
+Possible antecedents:
+- John
+- Alex
+Both are singular masculine noun phrases and therefore satisfy basic gender and number agreement with "he".
+
+The algorithm examines the parse tree and searches for a suitable antecedent according to Hobbs' syntactic search procedure. Depending on the exact parse structure and search order, it may select one of these noun phrases.
+
+However, it cannot reliably determine the intended person from this sentence alone because both candidates are grammatically valid.
+c) Discuss one real-world scenario where syntactic constraints alone fail to ensure coherence.
+A real-world example is understanding conversations in customer service systems or chatbots.
+
+Consider the following conversation:
+- Customer: "I spoke to Rahul about the payment issue."
+- Customer: "He said that the transaction would be completed tomorrow."
+In this example, the pronoun "He" refers to Rahul.
+
+However, suppose the conversation contains multiple male individuals, such as Rahul and the customer support manager.
+
+A syntax-based system may identify multiple possible antecedents because both candidates satisfy grammatical constraints.
+
+To resolve this correctly, the system needs additional information, such as:
+1. Previous conversation history.
+2. Knowledge about the people involved.
+3. The meaning and context of the discussion.
+4. Real-world information about who made the statement.
+This shows that grammatical rules alone are not always sufficient to understand the intended meaning.
+
+Conclusion: Syntactic algorithms such as Hobbs' algorithm help identify possible antecedents, but semantic information and real-world context are also necessary for accurate reference resolution.
